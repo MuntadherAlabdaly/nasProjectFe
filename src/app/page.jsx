@@ -11,18 +11,15 @@ export default function Home() {
               LIVE
             </div>
             <div className="absolute top-2 right-2 flex items-center space-x-2 text-gray-200">
-              <AiOutlineEye className="h-6 w-6 text-gray-200" /> {/* Neutral contrasting color */}
-              <span className="text-lg font-semibold text-gray-200">5</span> {/* Neutral contrasting color */}
+              <AiOutlineEye className="h-6 w-6 text-gray-200" /> 
+              <span className="text-lg font-semibold text-gray-200">5</span> 
             </div>
           <div className="bg-gray-100 rounded-lg shadow-lg overflow-hidden relative">
-            {/* Camera Placeholder */}
              <CameraStream
                 streamUrl="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             />
           </div>
-          {/* Camera 2 */}
           <div className="bg-gray-100 rounded-lg shadow-lg overflow-hidden relative">
-            {/* Camera Placeholder */}
             <CameraStream
                 streamUrl="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             />
