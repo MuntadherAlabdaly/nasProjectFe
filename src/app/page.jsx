@@ -1,3 +1,4 @@
+import CameraStream from "../components/CameraStream"
 import { AiOutlineEye } from "react-icons/ai";
 
 export default function Home() {
@@ -11,23 +12,19 @@ export default function Home() {
             </div>
             <div className="absolute top-2 right-2 flex items-center space-x-2 text-gray-200">
               <AiOutlineEye className="h-6 w-6 text-gray-200" /> {/* Neutral contrasting color */}
-              <span className="text-lg font-semibold text-gray-200">100,000</span> {/* Neutral contrasting color */}
+              <span className="text-lg font-semibold text-gray-200">5</span> {/* Neutral contrasting color */}
             </div>
           <div className="bg-gray-100 rounded-lg shadow-lg overflow-hidden relative">
             {/* Camera Placeholder */}
-            <img
-              src="https://via.placeholder.com/400x300"
-              alt="Mock Camera Stream"
-              className="w-full h-full object-cover"
+             <CameraStream
+                streamUrl="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             />
           </div>
           {/* Camera 2 */}
           <div className="bg-gray-100 rounded-lg shadow-lg overflow-hidden relative">
             {/* Camera Placeholder */}
-            <img
-              src="https://via.placeholder.com/400x300"
-              alt="Mock Camera Stream"
-              className="w-full h-full object-cover"
+            <CameraStream
+                streamUrl="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             />
           </div>
         </div>
