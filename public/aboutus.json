@@ -1,22 +1,22 @@
 [
   {
     "id": 1,
-    "image": "./assets/Image/adult-blur-blurred-background-687824.png",
-    "icon": "./assets/ICON/Group 204.png",
+    "image": "/assets/Image/adult-blur-blurred-background-687824.png",
+    "icon": "/assets/ICON/Group 204.png",
     "title": "توصيل سريع",
     "description": "نوصّل أكلك بأسرع وقت ممكن حتى يوصل وهو حار وطازج، لأن راحتك هي أولويتنا."
   },
   {
     "id": 2,
-    "image": "./assets/Image/chef-cook-food-33614.png",
-    "icon": "./assets/ICON/Group 1133.png",
+    "image": "/assets/Image/chef-cook-food-33614.png",
+    "icon": "/assets/ICON/Group 1133.png",
     "title": "إستجابة تلقائية رائعة",
     "description": "نتابع طلبك خطوة بخطوة، ونضمن تنفيذ كل طلب بشكل دقيق وسريع بفضل تقنياتنا الحديثة."
   },
   {
     "id": 3,
-    "image": "./assets/Image/architecture-building-city-2047397.png",
-    "icon": "./assets/ICON/Group 245.png",
+    "image": "/assets/Image/architecture-building-city-2047397.png",
+    "icon": "/assets/ICON/Group 245.png",
     "title": "توصيل إلى المنزل",
     "description": "من مطبخنا إلى باب بيتك، نقدّم خدمة توصيل مريحة تخلّيك تستمتع بوقتك بدون قلق."
   }
