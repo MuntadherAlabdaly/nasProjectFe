@@ -18,22 +18,18 @@ const MainFooter = () => {
       <div className="flex space-x-12">
         <div className="flex flex-col space-y-2">
           {FooterLinks.slice(0, 4).map((item) => (
-            <span className="text-white poppins" key={item.id}>
-              {item.text}
-            </span>
+            <span key={item.id}>{item.text}</span>
           ))}
         </div>
         <div className="flex flex-col space-y-2">
           {FooterLinks.slice(4, 8).map((item) => (
-            <span className="text-white poppins" key={item.id}>
-              {item.text}
-            </span>
+            <span key={item.id}>{item.text}</span>
           ))}
         </div>
         <div className="flex flex-col items-center space-y-2">
           <a
             href="https://www.instagram.com"
-            className="flex items-center text-white space-x-2"
+            className="flex items-center space-x-2"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -42,7 +38,7 @@ const MainFooter = () => {
           </a>
           <a
             href="https://www.whatsapp.com"
-            className="flex items-center text-white space-x-2"
+            className="flex items-center space-x-2"
             target="_blank"
             rel="noopener noreferrer"
           >
