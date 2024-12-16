@@ -51,7 +51,7 @@ body::-webkit-scrollbar {
 
 .header-banner {
   background-color: #eadccd;
-  height: 600px !important;
+  height: 100% !important;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
