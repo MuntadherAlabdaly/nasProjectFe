@@ -1,32 +1,32 @@
-FROM node:20.18.0-slim AS base
-
-LABEL fly_launch_runtime="Next.js"
+# Use Node.js Alpine as the base image
+FROM node:alpine AS builder
 
 WORKDIR /app
 
-ENV NODE_ENV="production"
+# Copy package files and install dependencies
+COPY package.json package-lock.json ./
+RUN npm install
 
-FROM base AS build
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
-
-COPY package-lock.json package.json ./
-RUN npm ci --include=dev
-
+# Copy all source code
 COPY . .
 
-RUN npx next build --experimental-build-mode compile
+# Build the Next.js app
+RUN npm run build
 
-RUN npm prune --omit=dev
+# Use a lightweight production image
+FROM node:alpine AS runner
 
-FROM base
+WORKDIR /app
 
-COPY --from=build /app /app
+# Copy built files from the builder stage
+COPY --from=builder /app /app
 
-RUN chmod +x /app/docker-entrypoint.js
+# Set environment to production
+ENV NODE_ENV=production
+ENV PORT=8000
 
-ENTRYPOINT [ "/app/docker-entrypoint.js" ]
-
+# Expose port 8000 for Fly.io
 EXPOSE 8000
 
-CMD [ "npm", "run", "dev" ]
+# Start the Next.js application on port 8000
+CMD ["npm", "run", "start"]

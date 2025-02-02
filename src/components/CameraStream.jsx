@@ -1,10 +1,11 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const CameraStream = () => {
   const [cameraUrls, setCameraUrls] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const imgRefs = useRef([]);
 
   useEffect(() => {
     const fetchCameraUrls = async () => {
@@ -12,8 +13,8 @@ const CameraStream = () => {
         setLoading(true);
         setTimeout(() => {
           const mockResponse = [
-            "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-            "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+            "https://nasstream.fly.dev/stream",
+            "https://nasstream.fly.dev/stream",
           ];
           setCameraUrls(mockResponse);
           setLoading(false);
@@ -26,6 +27,20 @@ const CameraStream = () => {
 
     fetchCameraUrls();
   }, []);
+
+  const handleFullscreen = (index) => {
+    if (imgRefs.current[index]) {
+      if (imgRefs.current[index].requestFullscreen) {
+        imgRefs.current[index].requestFullscreen();
+      } else if (imgRefs.current[index].webkitRequestFullscreen) { 
+        imgRefs.current[index].webkitRequestFullscreen();
+      } else if (imgRefs.current[index].mozRequestFullScreen) { 
+        imgRefs.current[index].mozRequestFullScreen();
+      } else if (imgRefs.current[index].msRequestFullscreen) {
+        imgRefs.current[index].msRequestFullscreen();
+      }
+    }
+  };
 
   if (loading) {
     return <div className="text-black">Loading camera streams...</div>;
@@ -40,15 +55,22 @@ const CameraStream = () => {
       {cameraUrls.map((url, index) => (
         <div
           key={index}
-          className="bg-gray-100 rounded-lg  overflow-hidden flex items-center justify-center w-full h-full"
+          className="relative bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center w-full h-full"
         >
-          <video
-            src={url}
-            autoPlay
-            controls
-            muted
-            className="w-full h-full object-cover"
+          <img
+            ref={(el) => (imgRefs.current[index] = el)}
+            src={`${url}?t=${Date.now()}`}
+            alt="Live camera stream"
+            className="w-full h-full object-cover cursor-pointer"
+            onClick={() => handleFullscreen(index)}
           />
+
+          <button
+            onClick={() => handleFullscreen(index)}
+            className="absolute top-2 right-2 bg-black bg-opacity-50 text-white px-3 py-1 rounded-md text-sm"
+          >
+            ⛶ Fullscreen
+          </button>
         </div>
       ))}
     </div>
