@@ -57,7 +57,6 @@ const CameraStream = () => {
           key={index}
           className="relative bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center w-full h-full"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element*/}
           <img
             ref={(el) => (imgRefs.current[index] = el)}
             src={`${url}?t=${Date.now()}`}
