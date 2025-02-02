@@ -1,33 +1,32 @@
 # Use Node.js Alpine as the base image
 FROM node:alpine AS builder
 
-# Set working directory inside container
 WORKDIR /app
 
 # Copy package files and install dependencies
 COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy all source code to the container
+# Copy all source code
 COPY . .
 
-# Build the Next.js application
+# Build the Next.js app
 RUN npm run build
 
 # Use a lightweight production image
 FROM node:alpine AS runner
 
-# Set working directory
 WORKDIR /app
 
-# Copy built files from builder stage
+# Copy built files from the builder stage
 COPY --from=builder /app /app
 
 # Set environment to production
 ENV NODE_ENV=production
+ENV PORT=8000
 
-# Expose the port Next.js runs on
+# Expose port 8000 for Fly.io
 EXPOSE 8000
 
-# Start the Next.js application
+# Start the Next.js application on port 8000
 CMD ["npm", "run", "start"]
