@@ -4,6 +4,7 @@ import Logo2 from "../../assets/logo2.png";
 
 import CameraStream from "../CameraStream";
 import { AiOutlineEye } from "react-icons/ai";
+import ViewerCounter from "./ViewerCounter";
 
 const Banner = () => {
   return (
@@ -13,9 +14,8 @@ const Banner = () => {
           مباشر
         </div>
 
-        <div className="absolute top-2 right-2 flex items-center space-x-3 text-gray-200 bg-gray-800 bg-opacity-50 border border-gray-300 rounded-lg px-5 py-2">
-          <AiOutlineEye className="h-8 w-8 text-white" />
-          <span className="text-xl font-bold text-white">5</span>
+        <div>
+          <ViewerCounter />
         </div>
       </div>
       <div className="mr-2">
