@@ -12,8 +12,8 @@ const CameraStream = () => {
         setLoading(true);
         setTimeout(() => {
           const mockResponse = [
-            "Dx5qFachd3A", 
-            "Dx5qFachd3A", 
+            "HbAMGNGumo4", 
+            "HbAMGNGumo4", 
           ];
           setYoutubeUrls(mockResponse);
           setLoading(false);
@@ -69,6 +69,7 @@ const CameraStream = () => {
             allowFullScreen
             className="youtube-embed w-full h-full object-cover"
           ></iframe>
+
           <button
             onClick={() => handleFullscreen(index)}
             className="absolute top-2 right-2 bg-black bg-opacity-50 text-white px-3 py-1 rounded-md text-sm"
