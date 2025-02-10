@@ -1,49 +1,49 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const CameraStream = () => {
-  const [cameraUrls, setCameraUrls] = useState([]);
+  const [youtubeUrls, setYoutubeUrls] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const imgRefs = useRef([]);
 
   useEffect(() => {
-    const fetchCameraUrls = async () => {
+    const fetchYoutubeUrls = async () => {
       try {
         setLoading(true);
         setTimeout(() => {
           const mockResponse = [
-            "https://nasstream.fly.dev/stream",
-            "https://nasstream.fly.dev/stream",
+            "Dx5qFachd3A", 
+            "Dx5qFachd3A", 
           ];
-          setCameraUrls(mockResponse);
+          setYoutubeUrls(mockResponse);
           setLoading(false);
         }, 2000);
       } catch (err) {
-        setError("Failed to load camera streams");
+        setError("Failed to load YouTube streams");
         setLoading(false);
       }
     };
 
-    fetchCameraUrls();
+    fetchYoutubeUrls();
   }, []);
 
   const handleFullscreen = (index) => {
-    if (imgRefs.current[index]) {
-      if (imgRefs.current[index].requestFullscreen) {
-        imgRefs.current[index].requestFullscreen();
-      } else if (imgRefs.current[index].webkitRequestFullscreen) { 
-        imgRefs.current[index].webkitRequestFullscreen();
-      } else if (imgRefs.current[index].mozRequestFullScreen) { 
-        imgRefs.current[index].mozRequestFullScreen();
-      } else if (imgRefs.current[index].msRequestFullscreen) {
-        imgRefs.current[index].msRequestFullscreen();
+    const iframe = document.getElementById(`youtube-frame-${index}`);
+    if (iframe) {
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.mozRequestFullScreen) {
+        iframe.mozRequestFullScreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
       }
     }
   };
 
   if (loading) {
-    return <div className="text-black">Loading camera streams...</div>;
+    return <div className="text-black">Loading streams...</div>;
   }
 
   if (error) {
@@ -52,19 +52,23 @@ const CameraStream = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full h-full">
-      {cameraUrls.map((url, index) => (
+      {youtubeUrls.map((videoId, index) => (
         <div
           key={index}
           className="relative bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center w-full h-full"
         >
-          <img
-            ref={(el) => (imgRefs.current[index] = el)}
-            src={`${url}?t=${Date.now()}`}
-            alt="Live camera stream"
-            className="w-full h-full object-cover cursor-pointer"
-            onClick={() => handleFullscreen(index)}
-          />
-
+          <iframe
+            id={`youtube-frame-${index}`}
+            width="100%"
+            height="100%"
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&fs=1&iv_load_policy=3`}
+            title="YouTube Live Stream"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+            className="youtube-embed w-full h-full object-cover"
+          ></iframe>
           <button
             onClick={() => handleFullscreen(index)}
             className="absolute top-2 right-2 bg-black bg-opacity-50 text-white px-3 py-1 rounded-md text-sm"
