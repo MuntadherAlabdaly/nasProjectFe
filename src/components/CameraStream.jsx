@@ -12,9 +12,10 @@ const CameraStream = () => {
         setLoading(true);
         setTimeout(() => {
           const mockResponse = [
-            "j_gtqrq_Tjk", 
-            "j_gtqrq_Tjk", 
+            "XgLILtERnY4", 
+            "XgLILtERnY4", 
           ];
+          
           setYoutubeUrls(mockResponse);
           setLoading(false);
         }, 2000);
