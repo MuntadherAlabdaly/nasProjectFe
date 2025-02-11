@@ -12,8 +12,8 @@ const CameraStream = () => {
         setLoading(true);
         setTimeout(() => {
           const mockResponse = [
-            "HbAMGNGumo4", 
-            "HbAMGNGumo4", 
+            "j_gtqrq_Tjk", 
+            "j_gtqrq_Tjk", 
           ];
           setYoutubeUrls(mockResponse);
           setLoading(false);
@@ -57,7 +57,7 @@ const CameraStream = () => {
           <iframe
             id={`youtube-frame-${index}`}
             src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&fs=1&iv_load_policy=3&playlist=${videoId}`}
-            title="YouTube Live Stream"
+            title="Nas Stream"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             referrerPolicy="strict-origin-when-cross-origin"
