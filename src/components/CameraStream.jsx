@@ -5,26 +5,30 @@ const CameraStream = () => {
   const [youtubeUrls, setYoutubeUrls] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [streamEnabled, setStreamEnabled] = useState(true);
 
   useEffect(() => {
-    const fetchYoutubeUrls = async () => {
+    const fetchConfig = async () => {
       try {
-        setLoading(true);
-        setTimeout(() => {
-          const mockResponse = [
-            "HbAMGNGumo4", 
-            "HbAMGNGumo4", 
-          ];
-          setYoutubeUrls(mockResponse);
+        const response = await fetch("/config.json");
+        const config = await response.json();
+        setStreamEnabled(config.streamEnabled);
+
+        if (config.streamEnabled) {
+          setTimeout(() => {
+            setYoutubeUrls(["HbAMGNGumo4", "HbAMGNGumo4"]);
+            setLoading(false);
+          }, 2000);
+        } else {
           setLoading(false);
-        }, 2000);
+        }
       } catch (err) {
-        setError("Failed to load YouTube streams");
+        setError("Failed to load stream settings");
         setLoading(false);
       }
     };
 
-    fetchYoutubeUrls();
+    fetchConfig();
   }, []);
 
   const handleFullscreen = (index) => {
@@ -43,11 +47,19 @@ const CameraStream = () => {
   };
 
   if (loading) {
-    return <div className="text-black text-center">Loading streams...</div>;
+    return <div className="text-black text-center">Loading stream settings...</div>;
   }
 
   if (error) {
     return <div className="text-red-500 text-center">{error}</div>;
+  }
+
+  if (!streamEnabled) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <h2 className="text-3xl font-bold text-orange-500">المطعم مغلق حاليا</h2>
+      </div>
+    );
   }
 
   return (
