@@ -16,7 +16,7 @@ const CameraStream = () => {
 
         if (config.streamEnabled) {
           setTimeout(() => {
-            setYoutubeUrls(["XgLILtERnY4", "XgLILtERnY4"]);
+            setYoutubeUrls(["poDycJmf1k4", "poDycJmf1k4"]);
             setLoading(false);
           }, 2000);
         } else {
