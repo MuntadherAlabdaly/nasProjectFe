@@ -1,0 +1,29 @@
+{
+    "menu": [
+      {
+        "id": 1,
+        "name": "برجر لحم كلاسيكي",
+        "price": 7.99,
+        "description": "برجر لحم بقري مع الجبن والخس والطماطم",
+        "image": "/images/burger.jpg",
+        "category": "وجبات رئيسية"
+      },
+      {
+        "id": 2,
+        "name": "بيتزا مارجريتا",
+        "price": 9.99,
+        "description": "بيتزا مغطاة بصلصة الطماطم الطازجة والجبن",
+        "image": "/images/pizza.jpg",
+        "category": "بيتزا"
+      },
+      {
+        "id": 3,
+        "name": "عصير برتقال طازج",
+        "price": 3.50,
+        "description": "عصير برتقال طبيعي 100%",
+        "image": "/images/orange-juice.jpg",
+        "category": "مشروبات"
+      }
+    ]
+  }
+  
