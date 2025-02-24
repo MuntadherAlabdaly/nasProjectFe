@@ -1,13 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
-import Menu from "./Menu/menu"; // Import the Menu component
+import Menu from "./Menu/menu";
 
 const CameraStream = () => {
   const [youtubeUrls, setYoutubeUrls] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [streamEnabled, setStreamEnabled] = useState(true);
-  const [showMenu, setShowMenu] = useState(false); // Control menu visibility
+  const [showMenu, setShowMenu] = useState(false);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const fetchConfig = async () => {
@@ -45,6 +46,20 @@ const CameraStream = () => {
       } else if (iframe.msRequestFullscreen) {
         iframe.msRequestFullscreen();
       }
+    }
+  };
+
+  const handleOrder = (item) => {
+    const customerName = prompt("أدخل اسمك لعرض الطلب على الشاشة:");
+    if (customerName) {
+      const newOrder = { id: Date.now(), name: customerName, dish: item.name, status: "قيد الإعداد" };
+      setOrders((prevOrders) => [...prevOrders, newOrder]);
+
+      fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newOrder),
+      });
     }
   };
 
@@ -93,17 +108,34 @@ const CameraStream = () => {
         onClick={() => setShowMenu(true)}
         className="mt-4 px-6 py-3 bg-orange-500 text-white rounded-lg shadow-lg hover:bg-orange-600 transition"
       >
-      اطلب الآن 
+        عرض القائمة 🍽️
       </button>
 
+      <div className="mt-6 w-full max-w-2xl p-4 bg-white rounded-lg shadow-md">
+        <h2 className="text-xl font-semibold text-orange-500 text-center">الطلبات الحالية</h2>
+        {orders.length === 0 ? (
+          <p className="text-center text-gray-500 mt-3">لا توجد طلبات بعد</p>
+        ) : (
+          <ul className="mt-3">
+            {orders.map((order) => (
+              <li key={order.id} className="p-3 bg-gray-100 rounded-lg mb-2 flex justify-between">
+                <span>{order.name} طلب {order.dish}</span>
+                <span className="text-green-500 font-semibold">{order.status}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
       {showMenu && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl w-full relative">
-            <button onClick={() => setShowMenu(false)} className="absolute top-2 right-4 text-gray-600 text-xl">✖</button>
-            <Menu />
-          </div>
-        </div>
-      )}
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setShowMenu(false)}>
+            <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full relative" onClick={(e) => e.stopPropagation()}>
+              <button onClick={() => setShowMenu(false)} className="absolute top-2 right-4 text-gray-600 text-xl">✖</button>
+              <Menu onOrder={handleOrder} />
+            </div>
+         </div>
+        )}
+
     </div>
   );
 };

@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 
-const Menu = () => {
+
+const Menu = ({ onOrder }) => {
   const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -35,6 +36,12 @@ const Menu = () => {
             <h3 className="text-lg font-bold text-gray-700">{item.name}</h3>
             <p className="text-sm text-gray-600">{item.description}</p>
             <p className="text-lg text-green-600 font-semibold mt-2">${item.price.toFixed(2)}</p>
+            <button
+              onClick={() => onOrder(item)}
+              className="mt-3 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition"
+            >
+              اطلب الآن
+            </button>
           </div>
         ))}
       </div>
