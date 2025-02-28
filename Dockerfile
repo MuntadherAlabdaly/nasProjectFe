@@ -1,48 +1,32 @@
-# syntax = docker/dockerfile:1
+# Use Node.js Alpine as the base image
+FROM node:alpine AS builder
 
-# Adjust NODE_VERSION as desired
-ARG NODE_VERSION=20.18.0
-FROM node:${NODE_VERSION}-slim AS base
-
-LABEL fly_launch_runtime="Next.js"
-
-# Next.js app lives here
 WORKDIR /app
 
-# Set production environment
-ENV NODE_ENV="production"
+# Copy package files and install dependencies
+COPY package.json package-lock.json ./
+RUN npm install
 
-
-# Throw-away build stage to reduce size of final image
-FROM base AS build
-
-# Install packages needed to build node modules
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
-
-# Install node modules
-COPY package-lock.json package.json ./
-RUN npm ci --include=dev
-
-# Copy application code
+# Copy all source code
 COPY . .
 
-# Build application
-RUN npx next build --experimental-build-mode compile
+# Build the Next.js app
+RUN npm run build
 
-# Remove development dependencies
-RUN npm prune --omit=dev
+# Use a lightweight production image
+FROM node:alpine AS runner
 
+WORKDIR /app
 
-# Final stage for app image
-FROM base
+# Copy built files from the builder stage
+COPY --from=builder /app /app
 
-# Copy built application
-COPY --from=build /app /app
+# Set environment to production
+ENV NODE_ENV=production
+ENV PORT=8000
 
-# Entrypoint sets up the container.
-ENTRYPOINT [ "/app/docker-entrypoint.js" ]
-
-# Start the server by default, this can be overwritten at runtime
+# Expose port 8000 for Fly.io
 EXPOSE 8000
-CMD [ "npm", "run", "dev" ]
+
+# Start the Next.js application on port 8000
+CMD ["npm", "run", "start"]
