@@ -47,7 +47,7 @@ const CameraStream = () => {
   };
 
   if (loading) {
-    return <div className="text-black text-center">Loading stream settings...</div>;
+    return <div className="text-black text-center">جارِ تحميل البث المباشر...</div>;
   }
 
   if (error) {
@@ -65,19 +65,26 @@ const CameraStream = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full h-auto px-6">
       {youtubeUrls.map((videoId, index) => (
-        <div key={index} className="yt-embed-holder">
+        <div
+          key={index}
+          className="relative aspect-video rounded-lg overflow-hidden shadow-lg group"
+        >
           <iframe
             id={`youtube-frame-${index}`}
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&fs=1&iv_load_policy=3&playlist=${videoId}`}
+            className="w-full h-full pointer-events-none"
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playlist=${videoId}&fs=0&disablekb=1&playsinline=1&enablejsapi=1&cc_load_policy=0`}
             title="Nas Stream"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
+
+          <div className="absolute top-0 left-0 w-full h-full z-10"></div>
+
           <button
             onClick={() => handleFullscreen(index)}
-            className="absolute top-2 right-2 bg-black bg-opacity-50 text-white px-3 py-1 rounded-md text-sm"
+            className="absolute top-2 right-2 z-20 bg-black bg-opacity-50 text-white px-3 py-1 rounded-md text-sm"
           >
             ⛶ Fullscreen
           </button>
