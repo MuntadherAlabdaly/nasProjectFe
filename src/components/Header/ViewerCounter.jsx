@@ -10,6 +10,9 @@ const ViewerCounter = () => {
       setViewers(prev => {
         let change = Math.random() > 0.5 ? 1 : -1; 
         let newCount = prev + change;
+
+        if (newCount < 7) return 7;
+        if (newCount > 30) return 30;
         return newCount < 1 ? 1 : newCount; 
       });
     }, 6000); 
