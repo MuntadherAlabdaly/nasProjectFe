@@ -10,13 +10,19 @@ const CameraStream = () => {
   useEffect(() => {
     const fetchConfig = async () => {
       try {
+        console.log("Fetching config...");
         const response = await fetch("/config.json");
         const config = await response.json();
         setStreamEnabled(config.streamEnabled);
-
+        const videoIdResponse = await fetch("/videoId.json");
+        if (!videoIdResponse.ok) {
+          throw new Error("Failed to fetch videoId.json");
+        }
+        const videoId= await videoIdResponse.json();
+        //const videoIds = videoText.split("\n").map((id) => id.trim()).filter(Boolean);
         if (config.streamEnabled) {
           setTimeout(() => {
-            setYoutubeUrls(["YpzMewbTIqw", "YpzMewbTIqw"]);
+            setYoutubeUrls([videoId.videoIds[0], videoId.videoIds[0]]);
             setLoading(false);
           }, 2000);
         } else {
