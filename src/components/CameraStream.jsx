@@ -81,18 +81,18 @@ const CameraStream = () => {
           key={index}
           className="relative aspect-video rounded-lg overflow-hidden shadow-lg group w-full max-w-2xl"
         >
-          <iframe
-            id={`youtube-frame-${index}`}
-            className="w-full h-full pointer-events-none"
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playlist=${videoId}&fs=0&disablekb=1&playsinline=1&enablejsapi=1&cc_load_policy=0`}
-            title="Nas Stream"
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-            muted
-            playsInline
-          ></iframe>
+        <iframe
+        id={`youtube-frame-${index}`}
+        className="w-full h-full pointer-events-none"
+        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playlist=${videoId}&fs=0&disablekb=1&playsinline=1&enablejsapi=1&cc_load_policy=0`}
+        title="Nas Stream"
+        frameBorder="0"
+        allow="autoplay; encrypted-media"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+        muted
+        playsInline
+        ></iframe>
   
           <div className="absolute top-0 left-0 w-full h-full z-10"></div>
   
