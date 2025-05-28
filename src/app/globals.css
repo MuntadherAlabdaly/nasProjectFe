@@ -97,3 +97,287 @@ body::-webkit-scrollbar {
   height: 100%;
   border: none;
 }
+/* Custom Fonts (Example - you can replace with your preferred Arabic font) */
+/* If you use Next.js with @next/font, handle this differently */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Harmattan:wght@400;700&display=swap');
+
+/* Font Definitions */
+.font-arabic-headline {
+  font-family: 'Cairo', sans-serif; /* For bold headlines */
+}
+
+.font-arabic-body {
+  font-family: 'Harmattan', sans-serif; /* For general text */
+}
+
+/* Background Pattern (Kitchen Ambiance) */
+.bg-kitchen-pattern {
+  background-image: url('/kitchen-bg-pattern.png'); /* Replace with your actual image path */
+  background-size: cover; /* or contain, or specific dimensions */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Optional: parallax effect */
+  position: relative;
+}
+
+.bg-kitchen-pattern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,240,220,0.8) 50%, rgba(250,200,150,0.7) 100%); /* Soft gradient overlay */
+  z-index: 0;
+}
+
+.bg-warm-gradient {
+  background: linear-gradient(to bottom right, #FFEDD5, #FDBA74, #FED7AA);
+}
+
+
+/* --- Keyframe Animations --- */
+
+/* Chef is live typing effect */
+.chef-typing {
+  overflow: hidden; /* Ensures the text appears typed */
+  border-right: 0.15em solid orange; /* The caret */
+  white-space: nowrap; /* Keeps content on a single line */
+  margin: 0 auto; /* Centers the content */
+  letter-spacing: 0.05em; /* Adjust as needed */
+  animation:
+    typing 3.5s steps(30, end) infinite, /* Adjust steps based on text length */
+    blink-caret 0.75s step-end infinite;
+}
+
+/* The typing animation */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The caret blinking animation */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
+
+
+/* Live Badge Pulse */
+.live-pulse {
+  animation: livePulse 1.5s infinite;
+}
+@keyframes livePulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+/* Chef Icon Animation */
+@keyframes chefIconFloat {
+  0% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(5deg); }
+  50% { transform: translateY(0) rotate(0deg); }
+  75% { transform: translateY(5px) rotate(-5deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+.animate-chef-icon {
+  animation: chefIconFloat 4s ease-in-out infinite;
+}
+
+/* Sizzle/Steam Overlay Animation */
+.sizzle-overlay {
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+              radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+  animation: sizzleFade 8s infinite alternate; /* Subtle fading in and out */
+}
+
+@keyframes sizzleFade {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.3; }
+}
+
+/* Order Button Steam Effect (Simulated) */
+.chef-hat-button {
+  position: relative;
+  z-index: 1; /* Ensure button is above confetti */
+  overflow: visible; /* Allows steam to escape button bounds */
+}
+
+.chef-hat-button .button-steam-top,
+.chef-hat-button .button-steam-left,
+.chef-hat-button .button-steam-right {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none; /* Make sure they don't block clicks */
+  z-index: 0;
+}
+
+.chef-hat-button:hover .button-steam-top,
+.chef-hat-button:hover .button-steam-left,
+.chef-hat-button:hover .button-steam-right {
+  animation: steamRise 1.5s forwards;
+  opacity: 1;
+}
+
+.chef-hat-button .button-steam-top {
+  width: 20px;
+  height: 20px;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: blur(5px);
+}
+.chef-hat-button .button-steam-left {
+  width: 15px;
+  height: 15px;
+  top: 0;
+  left: 15%;
+  transform: translateX(-50%);
+  filter: blur(4px);
+  animation-delay: 0.2s; /* Slight delay */
+}
+.chef-hat-button .button-steam-right {
+  width: 15px;
+  height: 15px;
+  top: 0;
+  right: 15%;
+  transform: translateX(50%);
+  filter: blur(4px);
+  animation-delay: 0.4s; /* Slight delay */
+}
+
+@keyframes steamRise {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-30px) scale(1);
+  }
+  100% {
+    transform: translateY(-60px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Confetti Animation */
+.confetti-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 20; /* Above the button */
+}
+
+.confetti-particle {
+  animation: confettiFall 1.5s forwards;
+  font-size: 2rem; /* Size of food icons */
+}
+
+@keyframes confettiFall {
+  0% {
+    opacity: 1;
+    transform: translateY(-50px) translateX(0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(200px) translateX(var(--random-x, 0px)) rotate(720deg);
+  }
+}
+
+/* For random X-axis movement in confetti */
+.confetti-particle:nth-child(even) {
+  --random-x: 50px;
+}
+.confetti-particle:nth-child(odd) {
+  --random-x: -50px;
+}
+/* You can add more complex random X values for more spread */
+
+
+/* General Animations (re-using from previous iterations) */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-down { animation: fadeInDown 0.6s ease-out forwards; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+
+
+@keyframes bounceIn {
+  0%, 20%, 40%, 60%, 80%, 100% { transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  0% { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+  20% { transform: scale3d(1.1, 1.1, 1.1); }
+  40% { transform: scale3d(0.9, 0.9, 0.9); }
+  60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); }
+  80% { transform: scale3d(0.97, 0.97, 0.97); }
+  100% { opacity: 1; transform: scale3d(1, 1, 1); }
+}
+.animate-bounce-in { animation: bounceIn 0.8s ease-out forwards; }
+
+@keyframes pulseOnce {
+  0% { transform: scale(1); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); }
+  50% { transform: scale(1.02); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1); }
+  100% { transform: scale(1); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); }
+}
+.animate-pulse-once { animation: pulseOnce 1.5s ease-in-out forwards; }
+
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 2s linear infinite;
+}
+
+@keyframes bounceSlight {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.animate-bounce-slight {
+  animation: bounceSlight 2s ease-in-out infinite;
+}
+
+/* Loader style */
+.loader {
+  border-top-color: #f3f3f3;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes ping-slow {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+.animate-ping-slow {
+  animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes potBoil {
+  0% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(3deg); } /* Slight upward movement, tilt */
+  50% { transform: translateY(0) rotate(0deg); }
+  75% { transform: translateY(-4px) rotate(-3deg); } /* Slight upward movement, opposite tilt */
+  100% { transform: translateY(0) rotate(0deg); }
+}
+.animate-pot-boil {
+  animation: potBoil 3s ease-in-out infinite; /* Slower, more subtle boil/wobble */
+}
