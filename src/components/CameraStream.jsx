@@ -167,7 +167,7 @@ const CameraStream = () => {
 
   // --- Main Stream UI ---
   return (
-    <div className="min-h-screen bg-kitchen-pattern flex flex-col items-center p-4 sm:p-6 font-arabic-body relative overflow-hidden">
+    <div className="min-h-screen bg-kitchen-pattern flex flex-col items-center p-2 sm:p-4 md:p-6 font-arabic-body relative overflow-hidden">
       {/* Background Sizzle Sound */}
       <audio ref={audioRef} loop muted={isMuted}>
         <source src="/sizzle-sound.mp3" type="audio/mpeg" />
@@ -215,16 +215,16 @@ const CameraStream = () => {
       </button>
 
       {/* Main Content Area */}
-      <div className="flex flex-col items-center w-full max-w-4xl z-10 p-2 sm:p-0">
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-orange-700 mb-4 text-center drop-shadow-lg animate-fade-in-down font-arabic-headline leading-tight">
+      <div className="flex flex-col items-center w-full max-w-full lg:max-w-4xl z-10 p-0"> {/* Adjusted max-w-full for mobile */}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-orange-700 mb-2 sm:mb-4 text-center drop-shadow-lg animate-fade-in-down font-arabic-headline leading-tight px-2"> {/* Added px-2 for very small screens */}
           شاهد سحر مطبخنا الآن! 🧑‍🍳
         </h1>
-        <p className="text-lg sm:text-xl text-gray-700 mb-6 text-center animate-fade-in font-arabic-body">
+        <p className="text-md sm:text-lg text-gray-700 mb-4 sm:mb-6 text-center animate-fade-in font-arabic-body px-2"> {/* Added px-2 */}
           <span className="chef-typing">الطباخ على الهواء مباشرة!</span>
         </p>
 
         {/* Live Stream Container (Serving Tray Style) - CROPPING APPLIED HERE */}
-        <div className="relative w-full max-w-3xl aspect-video rounded-3xl overflow-hidden shadow-2xl border-8 border-orange-300 bg-black transform transition-transform duration-500 hover:scale-[1.01] mb-8 kitchen-tray-effect">
+        <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border-8 border-orange-300 bg-black transform transition-transform duration-500 hover:scale-[1.01] mb-6 sm:mb-8 kitchen-tray-effect"> {/* Removed max-w-3xl here to allow full width on small screens */}
           <iframe
             className="w-full h-[calc(100%+80px)] absolute top-[-40px] left-0 pointer-events-none"
             src="https://www.youtube.com/embed/live_stream?channel=UCxjcbWh1Rh3XdiFomLHSfNg&autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=0&disablekb=1&playsinline=1&enablejsapi=1&cc_load_policy=0" // **CRITICAL: RESTORE YOUR ACTUAL YOUTUBE LIVE STREAM URL HERE!**
@@ -240,7 +240,7 @@ const CameraStream = () => {
           <div className="absolute inset-0 sizzle-overlay pointer-events-none opacity-50"></div>
 
           {/* "LIVE" Badge */}
-          <div className="absolute top-4 left-4 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded-full live-pulse shadow-md flex items-center gap-1 z-20">
+          <div className="absolute top-3 left-3 bg-red-600 text-white text-xs sm:text-sm font-bold px-2 py-0.5 sm:px-3 sm:py-1 rounded-full live-pulse shadow-md flex items-center gap-1 z-20"> {/* Adjusted padding/text size for smaller screens */}
             <span className="h-2 w-2 bg-white rounded-full block animate-ping-slow"></span>
             مباشر
           </div>
@@ -249,7 +249,7 @@ const CameraStream = () => {
 
         {/* Dynamic Fun Fact / Now Cooking */}
         {(funFact || nowCooking) && (
-          <div className="bg-white/95 rounded-full py-2 px-6 shadow-xl mb-8 text-center text-lg text-gray-800 font-semibold animate-bounce-in max-w-xl w-full sm:text-xl border border-orange-200">
+          <div className="bg-white/95 rounded-full py-2 px-4 sm:px-6 shadow-xl mb-6 sm:mb-8 text-center text-base sm:text-lg text-gray-800 font-semibold animate-bounce-in w-full max-w-xs sm:max-w-xl border border-orange-200"> {/* Adjusted max-w and text sizes */}
             {nowCooking ? (
               <p className="transition-opacity duration-500">{nowCooking}</p>
             ) : (
@@ -259,11 +259,11 @@ const CameraStream = () => {
         )}
 
         {/* Call to Action - Order Button */}
-        <div className="flex flex-col items-center gap-3 text-center mb-10 w-full max-w-xs sm:max-w-sm relative">
+        <div className="flex flex-col items-center gap-3 text-center mb-10 w-full max-w-xs sm:max-w-sm relative px-4"> {/* Added px-4 to prevent button touching edges */}
           <a
             href="#" // This should be a real link if the embedder doesn't handle click
             onClick={handleOrderClick} // Trigger confetti on click
-            className="order-button relative overflow-hidden bg-orange-600 hover:bg-orange-700 text-white font-extrabold py-4 px-10 rounded-full text-xl sm:text-2xl shadow-xl transform transition duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-4 focus:ring-orange-300 animate-pulse-once w-full chef-hat-button"
+            className="order-button relative overflow-hidden bg-orange-600 hover:bg-orange-700 text-white font-extrabold py-3 px-8 rounded-full text-lg sm:text-xl shadow-xl transform transition duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-4 focus:ring-orange-300 animate-pulse-once w-full chef-hat-button" // Adjusted padding/text size for smaller screens
             // Assuming data-glf-cuid and data-glf-ruid are handled by the script
             data-glf-cuid="103c1049-90ef-4a8d-be42-8f816e11f1eb"
             data-glf-ruid="2e854e6b-97a0-49b8-895d-63db20e51fd7"
@@ -274,7 +274,7 @@ const CameraStream = () => {
             <span className="button-steam-left"></span>
             <span className="button-steam-right"></span>
           </a>
-          <p className="text-md sm:text-lg text-gray-700 mt-2 font-medium leading-relaxed">
+          <p className="text-sm sm:text-md text-gray-700 mt-2 font-medium leading-relaxed"> {/* Adjusted text size */}
             المكونات طازجة .. جرب أكلنا الآن!
           </p>
 
@@ -296,26 +296,28 @@ const CameraStream = () => {
               ))}
             </div>
           )}
-<a
-  href="https://wa.me/9647866884455"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="fixed bottom-6 right-6 z-50 flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-5 rounded-full shadow-lg transition-transform duration-300 hover:scale-105"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 32 32"
-    width="24"
-    height="24"
-    className="h-6 w-6 mr-2"
-    fill="white"
-  >
-    <path
-      d="M19.11 17.205c-.094-.183-.553-.88-.682-.96-.129-.08-.226-.122-.313.081-.087.203-.961 1.445-1.314 1.758-.353.314-.721.353-.984.234-.263-.118-1.559-.578-1.921-.716-.362-.137-.629-.217-.896.081-.267.299-.961 1.445-1.284 1.758-.323.314-.527.362-.814.183-.287-.182-1.744-.666-2.639-1.597-.895-.931-1.422-2.071-1.516-2.274-.094-.203-.016-.406.182-.588.203-.183.406-.479.61-.778.203-.3.263-.527.323-.744.061-.217.031-.48-.062-.652-.094-.172-.527-1.27-.721-1.848-.195-.578-.39-.48-.585-.419-.195.061-.639.307-.984.621-.345.314-1.284 1.259-1.284 3.017 0 1.758 1.284 3.017 1.466 3.201.182.183 2.673 4.04 6.479 5.798 3.806 1.758 4.779 1.18 5.102 1.101.323-.08.782-.323.961-.621.183-.3-.129-.621-.323-.804z"
-    />
-  </svg>
-  مستعجل! اطلب من الواتساب
-</a>
+
+          {/* WhatsApp Button - Kept separate for fixed positioning */}
+          <a
+            href="https://wa.me/9647866884455"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="fixed bottom-6 right-6 z-50 flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition-transform duration-300 hover:scale-105 text-sm sm:text-base" // Adjusted padding/text size for mobile
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32 32"
+              width="20" // Slightly smaller icon for mobile
+              height="20" // Slightly smaller icon for mobile
+              className="h-5 w-5 mr-1.5 sm:h-6 sm:w-6 sm:mr-2" // Adjusted icon size and margin
+              fill="white"
+            >
+              <path
+                d="M19.11 17.205c-.094-.183-.553-.88-.682-.96-.129-.08-.226-.122-.313.081-.087.203-.961 1.445-1.314 1.758-.353.314-.721.353-.984.234-.263-.118-1.559-.578-1.921-.716-.362-.137-.629-.217-.896.081-.267.299-.961 1.445-1.284 1.758-.323.314-.527.362-.814.183-.287-.182-1.744-.666-2.639-1.597-.895-.931-1.422-2.071-1.516-2.274-.094-.203-.016-.406.182-.588.203-.183.406-.479.61-.778.203-.3.263-.527.323-.744.061-.217.031-.48-.062-.652-.094-.172-.527-1.27-.721-1.848-.195-.578-.39-.48-.585-.419-.195.061-.639.307-.984.621-.345.314-1.284 1.259-1.284 3.017 0 1.758 1.284 3.017 1.466 3.201.182.183 2.673 4.04 6.479 5.798 3.806 1.758 4.779 1.18 5.102 1.101.323-.08.782-.323.961-.621.183-.3-.129-.621-.323-.804z"
+              />
+            </svg>
+            مستعجل! اطلب واتساب
+          </a>
 
         </div>
       </div>
