@@ -226,10 +226,6 @@ const CameraStream = () => {
         {/* Live Stream Container (Serving Tray Style) - CROPPING APPLIED HERE */}
         <div className="relative w-full max-w-3xl aspect-video rounded-3xl overflow-hidden shadow-2xl border-8 border-orange-300 bg-black transform transition-transform duration-500 hover:scale-[1.01] mb-8 kitchen-tray-effect">
           <iframe
-            // Key changes for hiding YouTube elements:
-            // 1. `height: calc(100% + 50px)`: Makes iframe taller than its container
-            // 2. `top: -25px`: Shifts iframe upwards to hide bottom controls (and some top padding)
-            //    Adjust '50px' and '25px' based on exact YouTube player height/margins.
             className="w-full h-[calc(100%+80px)] absolute top-[-40px] left-0 pointer-events-none"
             src="https://www.youtube.com/embed/live_stream?channel=UCxjcbWh1Rh3XdiFomLHSfNg&autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=0&disablekb=1&playsinline=1&enablejsapi=1&cc_load_policy=0" // **CRITICAL: RESTORE YOUR ACTUAL YOUTUBE LIVE STREAM URL HERE!**
             title="Live Kitchen View"
@@ -249,10 +245,6 @@ const CameraStream = () => {
             مباشر
           </div>
 
-          {/* Animated Cooking Pot Icon (on top of the potentially hidden area) */}
-          <div className="absolute bottom-6 right-6 text-7xl animate-pot-boil drop-shadow-xl z-20">
-            🍳
-          </div>
         </div>
 
         {/* Dynamic Fun Fact / Now Cooking */}
@@ -283,7 +275,7 @@ const CameraStream = () => {
             <span className="button-steam-right"></span>
           </a>
           <p className="text-md sm:text-lg text-gray-700 mt-2 font-medium leading-relaxed">
-            المكونات طازجة والنار مولعة.. جرب أكلنا الآن!
+            المكونات طازجة .. جرب أكلنا الآن!
           </p>
 
           {/* Confetti Particles */}
@@ -305,10 +297,6 @@ const CameraStream = () => {
             </div>
           )}
         </div>
-
-        <p className="text-md text-gray-600 mt-auto pt-8 text-center">
-          شكرًا لاختيارك مطعمنا. نأمل أن تستمتع بمشاهدة طلبك يُصنع بكل عناية!
-        </p>
       </div>
     </div>
   );
