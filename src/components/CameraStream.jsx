@@ -17,16 +17,7 @@ const CameraStream = () => {
   const audioRef = useRef(null); // Ref for the audio element
   const confettiTimeoutRef = useRef(null); // Ref for confetti timeout
 
-  // Data for dynamic content (Iraqi dialect)
-  const foodFunFacts = [
-    "تدري كل أكلة نسويها بحب وشغف؟ 💖",
-    "نستخدم بس أحسن وأطيب المكونات الطازجة علمود تذوق أطيب طعم! 🥦",
-    "فريقنا كله يشتغل بجد علمود يوصلك تحفتك الفنية بأسرع وقت! 🚀",
-    "تكدر تخمن شنو الطبق الجاي اللي راح يجهز؟ 🤔",
-    "سر طعمنا الطيب يكمن بوصفاتنا الخاصة بينا! 🤫",
-    "استمتع وشوف سحر الطبخ كدام عينك! ✨",
-    "نتمنالك وجبة شهية مقدماً! 😋",
-  ];
+
 
   const dishesCooking = [
     "هسه ينطبخ: كبسة دجاج شهية! 🍗",
@@ -73,20 +64,9 @@ const CameraStream = () => {
     document.body.appendChild(script);
 
     // Start rotating fun facts
-    let currentFactIndex = 0;
-    setFunFact(foodFunFacts[currentFactIndex]);
-    funFactIntervalRef.current = setInterval(() => {
-      currentFactIndex = (currentFactIndex + 1) % foodFunFacts.length;
-      setFunFact(foodFunFacts[currentFactIndex]);
-    }, 8000); // Change fact every 8 seconds
 
     // Start rotating "Now Cooking" dishes
-    let currentDishIndex = 0;
-    setNowCooking(dishesCooking[currentDishIndex]);
-    nowCookingIntervalRef.current = setInterval(() => {
-      currentDishIndex = (currentDishIndex + 1) % dishesCooking.length;
-      setNowCooking(dishesCooking[currentDishIndex]);
-    }, 12000); // Change dish every 12 seconds
+
 
     // Cleanup function
     return () => {
@@ -94,7 +74,7 @@ const CameraStream = () => {
       if (funFactIntervalRef.current) clearInterval(funFactIntervalRef.current);
       if (nowCookingIntervalRef.current) clearInterval(nowCookingIntervalRef.current);
     };
-  }, [streamEnabled, foodFunFacts, dishesCooking]); // Added dependencies for linting
+  }, [streamEnabled]); 
 
   // --- Confetti animation logic ---
   const handleOrderClick = useCallback(() => {
