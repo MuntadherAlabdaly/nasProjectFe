@@ -205,17 +205,16 @@ const CameraStream = () => {
 
         {/* Live Stream Container (Serving Tray Style) - CROPPING APPLIED HERE */}
         <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border-8 border-orange-300 bg-black transform transition-transform duration-500 hover:scale-[1.01] mb-6 sm:mb-8 kitchen-tray-effect"> {/* Removed max-w-3xl here to allow full width on small screens */}
-          <iframe
-            className="w-full h-[calc(100%+80px)] absolute top-[-40px] left-0 pointer-events-none"
-            src="https://www.youtube.com/embed/live_stream?channel=UCxjcbWh1Rh3XdiFomLHSfNg&autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=0&disablekb=1&playsinline=1&enablejsapi=1&cc_load_policy=0" // **CRITICAL: RESTORE YOUR ACTUAL YOUTUBE LIVE STREAM URL HERE!**
-            title="Live Kitchen View"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-            muted // Muted for autoplay compatibility
-            playsInline // Essential for iOS autoplay
-          ></iframe>
+        <iframe
+        src="https://player.twitch.tv/?channel=abutoma&parent=localhost&parent=bu-taama.fly.dev&autoplay=true&muted=true"
+        allowFullScreen={false}
+        style={{
+          width: "100%",
+          height: "100%",
+          pointerEvents: "none",
+          border: "none"
+         }}
+  ></iframe>
           {/* Subtle Sizzling/Steam Overlay */}
           <div className="absolute inset-0 sizzle-overlay pointer-events-none opacity-50"></div>
 
